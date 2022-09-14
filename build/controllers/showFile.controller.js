@@ -116,21 +116,28 @@ var readFile = function (req, res) { return __awaiter(void 0, void 0, void 0, fu
 }); };
 exports.readFile = readFile;
 var searchBook = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var text, bookData, error_1;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
+    var _a, email, isbn, query, bookData, error_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _a.trys.push([0, 4, , 5]);
-                text = req.params.text;
-                if (!(text.length > 0)) return [3 /*break*/, 2];
-                return [4 /*yield*/, book_1.default.findOne({ isbn: text })];
+                _b.trys.push([0, 4, , 5]);
+                _a = req.query, email = _a.email, isbn = _a.isbn;
+                console.log({ email: email, isbn: isbn });
+                query = {};
+                if (email)
+                    query.authors = email;
+                if (isbn)
+                    query.isbn = isbn;
+                if (!(email || isbn)) return [3 /*break*/, 2];
+                return [4 /*yield*/, book_1.default.findOne(query)];
             case 1:
-                bookData = _a.sent();
+                bookData = _b.sent();
+                console.log({ bookData: bookData });
                 return [2 /*return*/, res.json({ data: bookData })];
             case 2: return [2 /*return*/, res.json({ data: null })];
             case 3: return [3 /*break*/, 5];
             case 4:
-                error_1 = _a.sent();
+                error_1 = _b.sent();
                 console.log(error_1);
                 return [2 /*return*/, res.json({ data: null, error: error_1 })];
             case 5: return [2 /*return*/];

@@ -31,7 +31,7 @@ export const uploadFile = async (req: any, res: Response) => {
                                     uuid: uid,
                                     title: e.title || "",
                                     isbn: e.isbn,
-                                    authors: e.author || "",
+                                    authors: e.authors || "",
                                     description: e.description || ""
                                 }
                                 bookArr.push(obj);

@@ -81,7 +81,7 @@ var uploadFile = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                                                     uuid: uid_1,
                                                     title: e.title || "",
                                                     isbn: e.isbn,
-                                                    authors: e.author || "",
+                                                    authors: e.authors || "",
                                                     description: e.description || ""
                                                 };
                                                 bookArr_1.push(obj);

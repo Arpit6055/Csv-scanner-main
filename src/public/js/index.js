@@ -14,10 +14,11 @@ const fileURL = document.querySelector("#fileURL");
 const toast = document.querySelector(".toast");
 
 
-const bookSearchBarBtn = document.querySelector("#bookSearchBarBtn");
+const bookSearchBarBtn1 = document.querySelector("#bookSearchBarBtn1");
+const bookSearchBarBtn2 = document.querySelector("#bookSearchBarBtn2");
 
-// const baseURL = "http://localhost:3000";
-const baseURL = "https://the-csv-scanner.herokuapp.com";
+const baseURL = "http://localhost:3000";
+// const baseURL = "https://the-csv-scanner.herokuapp.com";
 const uploadURL = `${baseURL}/api/files`;
 const bookSearchUrl = `${baseURL}/files/search/book/`;
 
@@ -54,8 +55,6 @@ dropZone.addEventListener("drop", (e) => {
 dropZone.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropZone.classList.add("dragged");
-
-
 });
 
 dropZone.addEventListener("dragleave", (e) => {
@@ -149,11 +148,89 @@ const showToast = (msg) => {
 };
 
 
-bookSearchBarBtn.addEventListener("click", async () => {
-  const searchText = document.querySelector("#booksearchInput").value || "";
-  console.log({ len: searchText.length });
+
+
+async function resultFunc (no, query){
+  console.log({abc:"bdsb,us"});
+  no=no==1?1:2;
+  query=query=="email"?"email":"isbn";
+  let searchText = document.querySelector(`#booksearchInput${no}`).value || "";
+  console.log({len: searchText.length});
   if (searchText.length > 0) {
-      getJSON(bookSearchUrl + searchText, (err, data)=>{
+    let url=bookSearchUrl +"?"+query+"=" +searchText;
+      getJSON(url, (err, data)=>{
+        if (err !== null) {
+          alert('Something went wrong: ' + err);
+        } else {
+          data = data.data;
+          let resultDiv = document.querySelector("#bookResults"), innerText = "";
+          resultDiv.style.display = "block";
+          if(data && !data.error){
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">Title : ${data.title}</div>`;
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">isbn : ${data.isbn}</div>`;
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">description : ${data.description}</div>`;
+            resultDiv.innerHTML = innerText;
+            return;
+          }else{
+            innerText+= "No book found"
+            resultDiv.innerHTML = innerText;
+            return;
+          }
+        }
+      });
+  }else return;
+}
+const getJSON = function(url, callback) {
+  console.log({url});
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', url, true);
+  xhr.responseType = 'json';
+  xhr.onload = function() {
+    var status = xhr.status;
+    if (status === 200) {
+      callback(null, xhr.response);
+    } else {
+      callback(status, xhr.response);
+    }
+  };
+  xhr.send();
+};
+
+document.querySelector('#bookSearchBarBtn1').addEventListener("click", async function resultFunc (){
+  let searchText = document.querySelector(`#booksearchInput1`).value || "";
+  console.log({len: searchText.length});
+  if (searchText.length > 0) {
+    let url=bookSearchUrl +"?"+"email"+"=" +searchText;
+      getJSON(url, (err, data)=>{
+        if (err !== null) {
+          alert('Something went wrong: ' + err);
+        } else {
+          console.log({data, msg:true});
+          data = data.data;
+          let resultDiv = document.querySelector("#bookResults"), innerText = "";
+          resultDiv.style.display = "block";
+          if(data && !data.error){
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">Title : ${data.title}</div>`;
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">isbn : ${data.isbn}</div>`;
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">Author : ${data.authors}</div>`;
+            innerText+=`<div class="column" style="box-sizing: border-box;font-size: 12px;line-height: 15px;">description : ${data.description}</div>`;
+            resultDiv.innerHTML = innerText;
+            return;
+          }else{
+            innerText+= "No book found"
+            resultDiv.innerHTML = innerText;
+            return;
+          }
+        }
+      });
+  }else return;
+});
+document.querySelector('#bookSearchBarBtn2').addEventListener("click", async function resultFunc (){
+  let searchText = document.querySelector(`#booksearchInput2`).value || "";
+  console.log({len: searchText.length});
+  if (searchText.length > 0) {
+    let url=bookSearchUrl +"?"+"isbn"+"=" +searchText;
+      getJSON(url, (err, data)=>{
         if (err !== null) {
           alert('Something went wrong: ' + err);
         } else {
@@ -175,22 +252,6 @@ bookSearchBarBtn.addEventListener("click", async () => {
       });
   }else return;
 });
-
-const getJSON = function(url, callback) {
-  console.log({url});
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', url, true);
-  xhr.responseType = 'json';
-  xhr.onload = function() {
-    var status = xhr.status;
-    if (status === 200) {
-      callback(null, xhr.response);
-    } else {
-      callback(status, xhr.response);
-    }
-  };
-  xhr.send();
-};
 
 document.querySelector('.searchInput').addEventListener('input', function(e) {
   var foo = this.value.split("-").join("");

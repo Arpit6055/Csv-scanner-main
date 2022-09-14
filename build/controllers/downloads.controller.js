@@ -55,7 +55,6 @@ var downloadFile = function (req, res) { return __awaiter(void 0, void 0, void 0
                     return [2 /*return*/, res.render('download', { error: 'Link has been expired.' })];
                 }
                 filePath = "".concat(__dirname, "/../../").concat(file.path);
-                console.log({ path: __dirname, filePath: filePath, filepath: file.path });
                 return [2 /*return*/, res.download(filePath)];
             case 2:
                 error_1 = _a.sent();

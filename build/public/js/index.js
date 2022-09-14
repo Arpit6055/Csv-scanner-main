@@ -47,7 +47,8 @@ var sharingContainer = document.querySelector(".sharing-container");
 var copyURLBtn = document.querySelector("#copyURLBtn");
 var fileURL = document.querySelector("#fileURL");
 var toast = document.querySelector(".toast");
-var bookSearchBarBtn = document.querySelector("#bookSearchBarBtn");
+var bookSearchBarBtn1 = document.querySelector("#bookSearchBarBtn1");
+var bookSearchBarBtn2 = document.querySelector("#bookSearchBarBtn2");
 var baseURL = "http://localhost:3000";
 // const baseURL = "https://the-csv-scanner.herokuapp.com";
 var uploadURL = "".concat(baseURL, "/api/files");
@@ -156,40 +157,46 @@ var showToast = function (msg) {
         toast.classList.remove("show");
     }, 2000);
 };
-bookSearchBarBtn.addEventListener("click", function () { return __awaiter(void 0, void 0, void 0, function () {
-    var searchText;
-    return __generator(this, function (_a) {
-        searchText = document.querySelector("#booksearchInput").value || "";
-        console.log({ len: searchText.length });
-        if (searchText.length > 0) {
-            getJSON(bookSearchUrl + searchText, function (err, data) {
-                if (err !== null) {
-                    alert('Something went wrong: ' + err);
-                }
-                else {
-                    data = data.data;
-                    var resultDiv = document.querySelector("#bookResults"), innerText = "";
-                    resultDiv.style.display = "block";
-                    if (data && !data.error) {
-                        innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Title : ".concat(data.title, "</div>");
-                        innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.isbn, "</div>");
-                        innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">description : ".concat(data.description, "</div>");
-                        resultDiv.innerHTML = innerText;
-                        return;
+function resultFunc(no, query) {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchText, url;
+        return __generator(this, function (_a) {
+            console.log({ abc: "bdsb,us" });
+            no = no == 1 ? 1 : 2;
+            query = query == "email" ? "email" : "isbn";
+            searchText = document.querySelector("#booksearchInput".concat(no)).value || "";
+            console.log({ len: searchText.length });
+            if (searchText.length > 0) {
+                url = bookSearchUrl + "?" + query + "=" + searchText;
+                getJSON(url, function (err, data) {
+                    if (err !== null) {
+                        alert('Something went wrong: ' + err);
                     }
                     else {
-                        innerText += "No book found";
-                        resultDiv.innerHTML = innerText;
-                        return;
+                        data = data.data;
+                        var resultDiv = document.querySelector("#bookResults"), innerText = "";
+                        resultDiv.style.display = "block";
+                        if (data && !data.error) {
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Title : ".concat(data.title, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.isbn, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">description : ".concat(data.description, "</div>");
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
+                        else {
+                            innerText += "No book found";
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
                     }
-                }
-            });
-        }
-        else
+                });
+            }
+            else
+                return [2 /*return*/];
             return [2 /*return*/];
-        return [2 /*return*/];
+        });
     });
-}); });
+}
 var getJSON = function (url, callback) {
     console.log({ url: url });
     var xhr = new XMLHttpRequest();
@@ -206,6 +213,82 @@ var getJSON = function (url, callback) {
     };
     xhr.send();
 };
+document.querySelector('#bookSearchBarBtn1').addEventListener("click", function resultFunc() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchText, url;
+        return __generator(this, function (_a) {
+            searchText = document.querySelector("#booksearchInput1").value || "";
+            console.log({ len: searchText.length });
+            if (searchText.length > 0) {
+                url = bookSearchUrl + "?" + "email" + "=" + searchText;
+                getJSON(url, function (err, data) {
+                    if (err !== null) {
+                        alert('Something went wrong: ' + err);
+                    }
+                    else {
+                        console.log({ data: data, msg: true });
+                        data = data.data;
+                        var resultDiv = document.querySelector("#bookResults"), innerText = "";
+                        resultDiv.style.display = "block";
+                        if (data && !data.error) {
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Title : ".concat(data.title, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.isbn, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.authors, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">description : ".concat(data.description, "</div>");
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
+                        else {
+                            innerText += "No book found";
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
+                    }
+                });
+            }
+            else
+                return [2 /*return*/];
+            return [2 /*return*/];
+        });
+    });
+});
+document.querySelector('#bookSearchBarBtn2').addEventListener("click", function resultFunc() {
+    return __awaiter(this, void 0, void 0, function () {
+        var searchText, url;
+        return __generator(this, function (_a) {
+            searchText = document.querySelector("#booksearchInput2").value || "";
+            console.log({ len: searchText.length });
+            if (searchText.length > 0) {
+                url = bookSearchUrl + "?" + "isbn" + "=" + searchText;
+                getJSON(url, function (err, data) {
+                    if (err !== null) {
+                        alert('Something went wrong: ' + err);
+                    }
+                    else {
+                        data = data.data;
+                        var resultDiv = document.querySelector("#bookResults"), innerText = "";
+                        resultDiv.style.display = "block";
+                        if (data && !data.error) {
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Title : ".concat(data.title, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.isbn, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">description : ".concat(data.description, "</div>");
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
+                        else {
+                            innerText += "No book found";
+                            resultDiv.innerHTML = innerText;
+                            return;
+                        }
+                    }
+                });
+            }
+            else
+                return [2 /*return*/];
+            return [2 /*return*/];
+        });
+    });
+});
 document.querySelector('.searchInput').addEventListener('input', function (e) {
     var foo = this.value.split("-").join("");
     if (foo.length > 0) {

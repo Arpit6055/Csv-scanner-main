@@ -4,6 +4,11 @@ import { Request, Response } from "express";
 import fs from "fs";
 import book from "../models/book";
 
+interface Query {
+    isbn:string;
+    email:string;
+ }
+
 export const downloadFile =async (req:any, res:Response) => {
     try {
         const file = await File.findOne({ uuid: req.params.uuid });
@@ -44,9 +49,13 @@ export const readFile = async (req:Request, res:Response) => {
 
 export const searchBook = async (req:Request, res:Response) => {
     try {
-        let text:string = req.params.text;
-        if(text.length>0){
-                let bookData = await book.findOne({isbn:text});
+        let {email,isbn} = req.query as unknown as Query;
+        console.log({email, isbn});
+        let query:any = {};
+        if(email)query.authors=email;
+        if(isbn)query.isbn=isbn;
+        if(email || isbn){
+                let bookData = await book.findOne(query);
                 return res.json({data:bookData});
         }else return res.json({data:null});
     } catch (error:any) {

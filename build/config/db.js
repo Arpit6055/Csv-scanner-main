@@ -42,6 +42,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.disconnectDB = void 0;
 require('dotenv').config();
 var mongoose_1 = __importDefault(require("mongoose"));
+var book_1 = __importDefault(require("../models/book"));
+var csv_1 = __importDefault(require("../models/csv"));
+var file_1 = __importDefault(require("../models/file"));
+var User_1 = __importDefault(require("../models/User"));
 var connection = null;
 var URI = process.env.MONGO_CONNECTION_URL || "";
 function connectDB() {
@@ -50,6 +54,18 @@ function connectDB() {
             // Connect the client to the server (optional starting in v4.7)
             mongoose_1.default.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(function () {
                 console.log('Connected successfully to database 😁😁😁');
+                book_1.default.deleteMany({}, function () {
+                    console.log("cleared book db");
+                });
+                file_1.default.deleteMany({}, function () {
+                    console.log("cleared file db");
+                });
+                User_1.default.deleteMany({}, function () {
+                    console.log("cleared user db");
+                });
+                csv_1.default.deleteMany({}, function () {
+                    console.log("cleared csv db");
+                });
             }).catch(function (error) {
                 console.log('Connection with DB failed ☹️☹️☹️☹️');
                 if (connection)

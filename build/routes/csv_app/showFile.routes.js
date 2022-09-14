@@ -30,5 +30,5 @@ var showFileCont = __importStar(require("../../controllers/showFile.controller")
 router.get('/:uuid', auth_1.ensureAuthenticated, showFileCont.downloadFile);
 router.get('/read/:uuid', auth_1.ensureAuthenticated, showFileCont.readFile);
 router.get('/delete/:uuid', auth_1.ensureAuthenticated, showFileCont.deleteFile);
-router.get('/search/book/:text', auth_1.ensureAuthenticated, showFileCont.searchBook);
+router.get('/search/book', auth_1.ensureAuthenticated, showFileCont.searchBook);
 exports.default = router;

@@ -22,8 +22,6 @@ var f = {
         } else {
             rtnStr = rtnFn();
         }
-        
-        console.log(rtnStr);
         return textData.innerHTML = rtnStr;
         
 });
