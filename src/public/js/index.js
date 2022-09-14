@@ -17,8 +17,8 @@ const toast = document.querySelector(".toast");
 const bookSearchBarBtn1 = document.querySelector("#bookSearchBarBtn1");
 const bookSearchBarBtn2 = document.querySelector("#bookSearchBarBtn2");
 
-const baseURL = "http://localhost:3000";
-// const baseURL = "https://the-csv-scanner.herokuapp.com";
+// const baseURL = "http://localhost:3000";
+const baseURL = "https://the-csv-scanner.herokuapp.com";
 const uploadURL = `${baseURL}/api/files`;
 const bookSearchUrl = `${baseURL}/files/search/book/`;
 

@@ -132,7 +132,6 @@ var searchBook = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, book_1.default.findOne(query)];
             case 1:
                 bookData = _b.sent();
-                console.log({ bookData: bookData });
                 return [2 /*return*/, res.json({ data: bookData })];
             case 2: return [2 /*return*/, res.json({ data: null })];
             case 3: return [3 /*break*/, 5];

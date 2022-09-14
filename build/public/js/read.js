@@ -22,7 +22,6 @@ regeStr = jsonStr.replace(/({|}[,]*|[^{}:]+:[^{}:,]*[,{]*)/g, function (m, p1) {
     else {
         rtnStr = rtnFn();
     }
-    console.log(rtnStr);
     return textData.innerHTML = rtnStr;
 });
 document.body.innerHTML += regeStr;

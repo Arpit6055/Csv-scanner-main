@@ -49,8 +49,8 @@ var fileURL = document.querySelector("#fileURL");
 var toast = document.querySelector(".toast");
 var bookSearchBarBtn1 = document.querySelector("#bookSearchBarBtn1");
 var bookSearchBarBtn2 = document.querySelector("#bookSearchBarBtn2");
-var baseURL = "http://localhost:3000";
-// const baseURL = "https://the-csv-scanner.herokuapp.com";
+// const baseURL = "http://localhost:3000";
+var baseURL = "https://the-csv-scanner.herokuapp.com";
 var uploadURL = "".concat(baseURL, "/api/files");
 var bookSearchUrl = "".concat(baseURL, "/files/search/book/");
 var maxAllowedSize = 100 * 1024 * 1024; //100mb
@@ -233,7 +233,7 @@ document.querySelector('#bookSearchBarBtn1').addEventListener("click", function 
                         if (data && !data.error) {
                             innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Title : ".concat(data.title, "</div>");
                             innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.isbn, "</div>");
-                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">isbn : ".concat(data.authors, "</div>");
+                            innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">Author : ".concat(data.authors, "</div>");
                             innerText += "<div class=\"column\" style=\"box-sizing: border-box;font-size: 12px;line-height: 15px;\">description : ".concat(data.description, "</div>");
                             resultDiv.innerHTML = innerText;
                             return;
