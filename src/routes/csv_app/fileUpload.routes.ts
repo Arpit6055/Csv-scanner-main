@@ -7,7 +7,7 @@ import path from 'path';
 import multer from 'multer';
 //alocating storage
 let storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, 'src/uploads/'),
+    destination: (req, file, cb) => cb(null, '/../src/uploads/'),
     filename: (req, file, cb) => {
         const uniqueName = `${path.parse(file.originalname).name}${Date.now() * Math.random()}${path.extname(file.originalname)}`;
         cb(null, uniqueName)

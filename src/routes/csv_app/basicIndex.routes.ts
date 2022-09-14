@@ -7,7 +7,7 @@ import * as indexController from '../../controllers/basicIndex.controllers'
 import multer from 'multer';
 //alocating storage
 let storage = multer.diskStorage({
-    destination: (req:any, file:any, cb:Function) => cb(null, 'src/uploads/profile_pic') ,
+    destination: (req:any, file:any, cb:Function) => cb(null, '/../src/uploads/profile_pic') ,
     filename: (req:any, file:any, cb:Function) => {
         const uniqueName = `${req.user.email}${Math.random()*1}${path.extname(file.originalname)}`;
         cb(null, uniqueName)
