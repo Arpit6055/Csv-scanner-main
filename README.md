@@ -2,7 +2,7 @@
 
 This is a CSV FILE SCANNING app using Node.js, Express, Passport, Mongoose, EJS and some other packages.
 
-Deployed at--> [Click Here](https://csv-scanner.herokuapp.com/)
+Deployed at--> [Click Here](https://the-csv-scanner.herokuapp.com/)
 
 ### Version: 2.0.0
 ### MongoDB
