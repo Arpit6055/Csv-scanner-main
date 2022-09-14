@@ -34,7 +34,7 @@ var indexController = __importStar(require("../../controllers/basicIndex.control
 var multer_1 = __importDefault(require("multer"));
 //alocating storage
 var storage = multer_1.default.diskStorage({
-    destination: function (req, file, cb) { return cb(null, 'src/uploads/profile_pic'); },
+    destination: function (req, file, cb) { return cb(null, './build/uploads/profile_pic'); },
     filename: function (req, file, cb) {
         var uniqueName = "".concat(req.user.email).concat(Math.random() * 1).concat(path_1.default.extname(file.originalname));
         cb(null, uniqueName);

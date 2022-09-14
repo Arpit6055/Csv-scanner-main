@@ -34,7 +34,7 @@ var auth_1 = require("../../config/auth");
 var userController = __importStar(require("../../controllers/user.controllers"));
 //alocating storage
 var storage = multer_1.default.diskStorage({
-    destination: function (req, file, cb) { return cb(null, 'src/uploads/'); },
+    destination: function (req, file, cb) { return cb(null, 'build/uploads/profile_pic'); },
     filename: function (req, file, cb) {
         var uniqueName = "".concat(path_1.default.parse(file.originalname).name).concat(Date.now() * Math.random()).concat(path_1.default.extname(file.originalname));
         cb(null, uniqueName);

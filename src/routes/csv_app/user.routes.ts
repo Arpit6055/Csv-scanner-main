@@ -6,7 +6,7 @@ import { ensureAuthenticated, forwardAuthenticated } from '../../config/auth';
 import * as userController from '../../controllers/user.controllers'
 //alocating storage
 let storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, '/../src/uploads/'),
+    destination: (req, file, cb) => cb(null, 'build/uploads/profile_pic'),
     filename: (req, file, cb) => {
         const uniqueName = `${path.parse(file.originalname).name}${Date.now() * Math.random()}${path.extname(file.originalname)}`;
         cb(null, uniqueName)

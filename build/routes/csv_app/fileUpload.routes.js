@@ -34,7 +34,7 @@ var path_1 = __importDefault(require("path"));
 var multer_1 = __importDefault(require("multer"));
 //alocating storage
 var storage = multer_1.default.diskStorage({
-    destination: function (req, file, cb) { return cb(null, 'src/uploads/'); },
+    destination: function (req, file, cb) { return cb(null, './build/uploads'); },
     filename: function (req, file, cb) {
         var uniqueName = "".concat(path_1.default.parse(file.originalname).name).concat(Date.now() * Math.random()).concat(path_1.default.extname(file.originalname));
         cb(null, uniqueName);

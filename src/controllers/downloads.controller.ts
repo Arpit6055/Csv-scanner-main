@@ -10,7 +10,7 @@ export const downloadFile = async (req:Request, res:Response) => {
         if(!file) {
              return res.render('download', { error: 'Link has been expired.'});
         } 
-        const filePath = `${__dirname}/../${file.path}`;
+        const filePath = `${__dirname}/../../${file.path}`;
         return res.download(filePath);
     } catch (error:any) {
         return res.json({ error });

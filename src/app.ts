@@ -8,13 +8,24 @@ import http from 'http';
 import passportConfig  from './config/passport';
 import path from  'path'
 const app = express();
+import fs from 'fs';
+
 // Passport Config
 passportConfig(passport);
 
 // DB Config
 import {connectDB, disconnectDB} from './config/db';
-
 connectDB();
+
+// fs post build actions
+var dirArr = ['./build/uploads', './build/uploads/profile_pic'];
+dirArr.forEach((e)=>{
+  if (!fs.existsSync(e)){
+      fs.mkdirSync(e);
+  }
+});
+
+
 
 
 const cors = require('cors');
@@ -30,7 +41,8 @@ app.use(expressLayouts);
 app.set('views', path.join(__dirname, '/../src/views/'));
 app.set('view engine', 'ejs');
 app.use(express.static('src/public'));
-app.use(express.static('./../src/uploads/profile_pic'))
+app.use(express.static('build/uploads/profile_pic'));
+app.use(express.static('build/uploads'));
 
 // Express body parser
 app.use(express.urlencoded({ extended: true }));

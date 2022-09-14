@@ -48,11 +48,19 @@ var index_1 = __importDefault(require("./routes/index"));
 var passport_2 = __importDefault(require("./config/passport"));
 var path_1 = __importDefault(require("path"));
 var app = (0, express_1.default)();
+var fs_1 = __importDefault(require("fs"));
 // Passport Config
 (0, passport_2.default)(passport_1.default);
 // DB Config
 var db_1 = require("./config/db");
 (0, db_1.connectDB)();
+// fs post build actions
+var dirArr = ['./build/uploads', './build/uploads/profile_pic'];
+dirArr.forEach(function (e) {
+    if (!fs_1.default.existsSync(e)) {
+        fs_1.default.mkdirSync(e);
+    }
+});
 var cors = require('cors');
 // Cors 
 var corsOptions = {
@@ -65,7 +73,8 @@ app.use(express_ejs_layouts_1.default);
 app.set('views', path_1.default.join(__dirname, '/../src/views/'));
 app.set('view engine', 'ejs');
 app.use(express_1.default.static('src/public'));
-app.use(express_1.default.static('./../src/uploads/profile_pic'));
+app.use(express_1.default.static('build/uploads/profile_pic'));
+app.use(express_1.default.static('build/uploads'));
 // Express body parser
 app.use(express_1.default.urlencoded({ extended: true }));
 // Express session

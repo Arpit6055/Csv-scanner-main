@@ -1,11 +1,12 @@
 {
-  "name": "node_passport_login",
+  "name": "csv_reader",
   "version": "2.0.0",
-  "description": "Node.js authentication with Passport",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./build/app.js"
+    "start": "npm run build && node ./build/app.js",
+    "build" : "tsc"
+
   },
   "keywords": [],
   "author": "",
